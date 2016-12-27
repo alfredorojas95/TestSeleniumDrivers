@@ -1,20 +1,24 @@
 package test;
 
-import test.LoginTest;
+import autentificacion.Conexion;
+import autentificacion.LoginTest;
+import org.openqa.selenium.WebDriver;
 
 public class MainChromeBrowser {
 
 	public static void main(String[] args) throws InterruptedException{
 		
-		LoginTest testUsuario = new LoginTest("webdriver.chrome.driver", "C:\\Users\\wilfr\\Documents\\GitHub\\TestSeleniumDrivers\\recursosSelenium\\ChromeDriver\\chromedriver.exe");
-		//LoginTest testUsuario = new LoginTest("webdriver.gecko.driver", "C:\\Users\\wilfr\\Documents\\GitHub\\TestSeleniumDrivers\\recursosSelenium\\FirefoxDriver\\geckodriver.exe");
+		Conexion conexion = new Conexion("webdriver.chrome.driver", "C:\\Users\\wilfr\\Documents\\GitHub\\TestSeleniumDrivers\\recursosSelenium\\ChromeDriver\\chromedriver.exe");
+		WebDriver driver = conexion.retornarDriver();
 		
-		testUsuario.autentificar("Alfredo", "123456");
-		//testUsuario.autentificar("testing", "123456");
-		//testUsuario.seleccionarGrupoyPerfil("G1429", "Administrador IDE");//Usuario Normal
-		testUsuario.seleccionarGrupoyPerfil("G1429", "Administrador de Grupo");//Usuario Administrador
-
+		LoginTest login = new LoginTest(driver);
+		login.autentificar("Alfredo", "123456");
+		login.seleccionarGrupoyPerfil("G1429", "Administrador IDE");
+		
+//		GestionAdmin admin = new GestionAdmin(driver);
+//		admin.
 
 
 	}
+	
 }
