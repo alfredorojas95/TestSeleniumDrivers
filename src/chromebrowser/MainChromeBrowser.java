@@ -2,19 +2,28 @@ package chromebrowser;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class MainChromeBrowser {
 
 	public static void main(String[] args) throws InterruptedException{
-
-		System.setProperty("webdriver.chrome.driver","C:\\Program Files\\SeleniumDrivers\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.get("http://glasgow.ceisufro.cl/geonodoadm30/");
+	
+		//Driver para Firefox ----------------------------------------------
+		System.setProperty("webdriver.gecko.driver","C:\\Users\\wilfr\\Documents\\GitHub\\TestSeleniumDrivers\\recursosSelenium\\FirefoxDriver\\geckodriver.exe");
+		WebDriver driverFirefox = new FirefoxDriver();
+		driverFirefox.get("http://glasgow.ceisufro.cl/geonodoadm30/");
+		//--------------------------------------------------------------------
 		
-		autentificarse(driver, "Alfredo", "123456");
-		seleccionarGrupoyPerfil(driver, "G1429", "Administrador IDE");
+		//driver para Google Chrome-------------------------------------------
+//		System.setProperty("webdriver.chrome.driver","C:\\Users\\wilfr\\Documents\\GitHub\\TestSeleniumDrivers\\recursosSelenium\\ChromeDriver\\chromedriver.exe");
+//		WebDriver driverChrome = new ChromeDriver();
+//		driverChrome.get("http://glasgow.ceisufro.cl/geonodoadm30/");
+		//-------------------------------------------------------------------
+		
+		autentificarse(driverFirefox, "Alfredo", "123456");
+		seleccionarGrupoyPerfil(driverFirefox, "G1429", "Administrador IDE");
 		
 		
 		
@@ -33,11 +42,12 @@ public class MainChromeBrowser {
 	public static void seleccionarGrupoyPerfil(WebDriver driver, String nombreGrupo, String nombrePerfil) throws InterruptedException{
 		
 		Select selectGrupo = new Select(driver.findElement(By.id("LoginForm_grupo")));
-		selectGrupo.selectByVisibleText("G1429");
+		//selectGrupo.selectByVisibleText(nombreGrupo);
+		selectGrupo.selectByValue("32");
 		
 		Thread.sleep(1000);
 		Select selectPerfil = new Select(driver.findElement(By.id("profilUser")));
-		selectPerfil.selectByVisibleText("Administrador IDE");
+		selectPerfil.selectByVisibleText(nombrePerfil);
 		driver.findElement(By.cssSelector("#btnAceptarLogin")).click();
 	}
 
